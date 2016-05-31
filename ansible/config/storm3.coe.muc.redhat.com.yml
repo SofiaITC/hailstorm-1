@@ -1,4 +1,4 @@
-layer1_ansible_host: storm3.coe.muc.redhat.com
+ayer1_ansible_host: storm3.coe.muc.redhat.com
 
 disable_registration_against_satellite: false
 

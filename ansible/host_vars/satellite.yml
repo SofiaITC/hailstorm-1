@@ -3,13 +3,14 @@ mem: "{{ layer2_satellite_mem }}"
 vcpu: "{{ layer2_satellite_cpu }}"
 disk:
   path: "{{ inventory_hostname_short }}.qcow2"
-  size: 200
+  size: 80
   format: qcow2
   partition_table:
-    lvmpv: 199500
+    lvmpv: 80000
     swap: 4096
     home: 2048
-    root: 190000
+    root: 70000
+graphics: vnc,listen=0.0.0.0
 
 pool_regex: "{{ satellite_subscription_pool_regex }}"
 #poolid: "{{ satellite_subscription_poolid }}"
