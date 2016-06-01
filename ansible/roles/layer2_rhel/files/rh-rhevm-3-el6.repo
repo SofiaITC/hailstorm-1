@@ -1,0 +1,23 @@
+[rhel-6-server-rhevm-3.6-rpms]
+baseurl = http://10.253.1.100/content/repo/rhel/6/rhev/3/manager
+name = Red Hat Enterprise Virtualization Manager 3.6 (RPMs)
+enabled = 1
+gpgcheck = 0
+
+[jb-eap-6-for-rhel-6-server-rpms]
+baseurl = http://10.253.1.100/content/repo/rhel/6/jboss/eap/6
+name = JBoss Enterprise Application Platform 6 (RHEL 6 Server) (RPMs)
+enabled = 1
+gpgcheck = 0
+
+[rhel-6-server-rpms]
+baseurl = http://10.253.1.100/content/repo/rhel/6/rhel/packages
+name = Red Hat Enterprise Linux 6 Server (RPMs)
+enabled = 1
+gpgcheck = 0
+
+[rhel-6-server-supplementary-rpms]
+baseurl = http://10.253.1.100/content/repo/rhel/6/rhel/supp
+name = Red Hat Enterprise Linux 6 Server - Supplementary (RPMs)
+enabled = 1
+gpgcheck = 0

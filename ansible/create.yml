@@ -3,11 +3,11 @@
   remote_user: root
   gather_facts: false
   tasks:
-    - set_fact:
-        rhsm_username: "{{ rhsm_username }}"
-        rhsm_password: "{{ rhsm_password }}"
-      tags:
-        - always
+    #    - set_fact:
+    #        rhsm_username: "{{ rhsm_username }}"
+    #        rhsm_password: "{{ rhsm_password }}"
+    #      tags:
+    #        - always
     - debug: var=vm_nics
       tags:
         - always
@@ -15,13 +15,13 @@
     #   tags:
     #     - always
 
-  vars_prompt:
-    - name: "rhsm_username"
-      prompt: "what is your Red Hat Subscription Manager username?"
-      default: "wrichter"
-      private: no
-    - name: "rhsm_password"
-      prompt: "what is your Red Hat Subscription Manager password?"
+  # vars_prompt:
+  #   - name: "rhsm_username"
+  #     prompt: "what is your Red Hat Subscription Manager username?"
+  #     default: "wrichter"
+  #     private: no
+  #   - name: "rhsm_password"
+  #     prompt: "what is your Red Hat Subscription Manager password?"
 
 - hosts: layer1
   remote_user: root

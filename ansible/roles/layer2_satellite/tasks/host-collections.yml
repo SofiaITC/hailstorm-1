@@ -1,10 +1,10 @@
 - name: get all host collections
-  shell: hammer host-collection list --organization "Default Organization" | awk '{ print $3 }'
+  shell: hammer host-collection list --organization "{{ organization }}" | awk '{ print $3 }'
   register: host_collections
   changed_when: false
 
 # just fill the list with the host collections that are needed
 - name: create host collections
-  command: hammer host-collection create --organization "Default Organization" --name {{ item.host_collection }}
+  command: hammer host-collection create --organization "{{ organization }}" --name {{ item.host_collection }}
   when: "item.host_collection not in host_collections.stdout"
   with_items: "{{ content_config }}"

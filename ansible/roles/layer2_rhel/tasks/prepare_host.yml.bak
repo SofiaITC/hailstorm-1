@@ -8,10 +8,9 @@
 #   command: 'subscription-manager attach --pool={{ poolid }}'
 #   when: subscription_list.stdout is not defined or poolid != subscription_list.stdout | regex_replace('Pool ID:\\s+(\\S*).*', '\\1')
 
-- copy: src=/root/projects/hailstorm/hailstorm/ansible/roles/layer2_rhel/files/rh-satellite-6-el7.repo dest=/etc/yum.repos.d/rh-satellite-6-el7.repo owner=root  group=root mode=0644 
-#- name: enable repos
-#  shell: 'subscription-manager repos --disable="*" {% for repo in repos %} --enable="{{repo}}" {% endfor %}'
-#  when: repos is defined
+- name: enable repos
+  shell: 'subscription-manager repos --disable="*" {% for repo in repos %} --enable="{{repo}}" {% endfor %}'
+  when: repos is defined
 - name: upgrade packages
   yum: name=* state=latest
   # OpenShift requires older  version of Docker, ensure that a failure doesn't stop the process

@@ -1,0 +1,29 @@
+[rhel-7-server-openstack-8-rpms]
+baseurl = http://10.253.1.100/content/repo/rhel/7/rhelosp/8/packages
+name = Red Hat OpenStack Platform 8 for RHEL 7 (RPMs)
+enabled = 1
+gpgcheck = 0
+
+[rhel-7-server-openstack-8-director-rpms]
+baseurl = http://10.253.1.100/content/repo/rhel/7/rhelosp/8/director
+name = Red Hat OpenStack Platform 8 director for RHEL 7 (RPMs)
+enabled = 1
+gpgcheck = 0
+
+[rhel-7-server-optional-rpms]
+baseurl = http://10.253.1.100/content/repo/rhel/7/rhel/optional/packages
+name = Red Hat Enterprise Linux 7 Server - Optional (RPMs)
+enabled = 1
+gpgcheck = 0
+
+[rhel-7-server-extras-rpms]
+baseurl = http://10.253.1.100/content/repo/rhel/7/rhel/extras
+name = Red Hat Enterprise Linux 7 Server - Extras (RPMs)
+enabled = 1
+gpgcheck = 0
+
+[rhel-7-server-rpms]
+baseurl = http://10.253.1.100/content/repo/rhel/7/rhel/packages
+name = Red Hat Enterprise Linux 7 Server (RPMs)
+enabled = 1
+gpgcheck = 0

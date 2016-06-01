@@ -1,0 +1,158 @@
+# BASIC CONFIG
+hailstorm_dns_domain: example.com
+root_password: redhat
+
+# BINARY FILES
+hailstorm_ssh_pub_key_file: hailstorm.pub
+hailstorm_ssh_priv_key_file: hailstorm
+undercloud_ssh_pub_key_file: undercloud.pub
+undercloud_ssh_priv_key_file: undercloud
+#rhel6_iso_image: rhel-server-6.8-x86_64-dvd.iso
+rhel7_iso_image: rhel-server-7.2-x86_64-dvd.iso
+# rhosp_images:
+#   - deploy-ramdisk-ironic-7.3.1-39.tar
+#   - discovery-ramdisk-7.3.1-59.tar
+#   - overcloud-full-7.3.1-59.tar
+rhosp_images:
+  - ironic-python-agent-8.0-20160415.1.tar
+  - overcloud-full-8.0-20160415.1.tar
+satellite_manifestfile: manifest.zip
+#cloudforms_ova_appliance: cfme-rhevm-5.5.3.4-1.x86_64.rhevm.ova
+cloudforms_ova_appliance: manageiq-ovirt-darga-1-rc1.1.ova
+
+# RED HAT SUBSCRIPTION POOLS
+#rhel6_subscription_poolid: 8a85f9814f220b7c014f221083430791
+#rhel7_subscription_poolid: 8a85f9814f220b7c014f221083430791
+#satellite_subscription_poolid: 8a85f9814f220b7c014f2211095208d2
+rhel7_subscription_poolid: 8a85f98154abaa090154accaaf2a5e03
+satellite_subscription_poolid: 8a85f9814c508347014c718a9cfd2e60
+satellite_subscription_pool_regex: "^Red Hat Satellite Employee Subscription$"
+rhel_subscription_pool_regex: "^Employee SKU$"
+rhev_subscription_pool_regex: "^Employee SKU$"
+rhosp_subscription_pool_regex: "^Employee SKU$"
+ose_subscription_pool_regex: "^Employee SKU$"
+
+# REPOSITORIES
+# rhosp_repos:
+#   - rhel-7-server-rpms
+#   - rhel-7-server-optional-rpms
+#   - rhel-7-server-extras-rpms
+#   - rhel-7-server-openstack-7.0-rpms
+#   - rhel-7-server-openstack-7.0-director-rpms
+rhosp_repos:
+  - rhel-7-server-rpms
+  - rhel-7-server-optional-rpms
+  - rhel-7-server-extras-rpms
+  - rhel-7-server-openstack-8-rpms
+  - rhel-7-server-openstack-8-director-rpms
+satellite_repos:
+  - rhel-7-server-rpms
+  - rhel-server-rhscl-7-rpms
+  - rhel-7-server-satellite-6.1-rpms
+rhevm_repos:
+  - rhel-6-server-rpms
+  - rhel-6-server-supplementary-rpms
+  - rhel-6-server-rhevm-3.6-rpms
+  - jb-eap-6-for-rhel-6-server-rpms
+rhevh_repos:
+  - rhel-7-server-rpms
+  - rhel-7-server-rhev-mgmt-agent-rpms
+ipa_repos:
+  - rhel-7-server-rpms
+ose3_repos:
+  - rhel-7-server-rpms
+  - rhel-7-server-extras-rpms
+  - rhel-7-server-ose-3.2-rpms
+ose3_additional_packages: docker-1.9.1
+#   - rhel-7-server-ose-3.1-rpms
+# ose3_additional_packages: docker-1.8.2
+tdagent_rpm: https://packages.treasuredata.com/2/redhat/7/x86_64/td-agent-2.2.0-0.x86_64.rpm
+
+
+timezone: Europe/Berlin
+
+
+ipa_user:
+  - username: consumer
+    password: "{{ root_password }}"
+    first: Consumer
+    last: User
+  - username: approver
+    password: "{{ root_password }}"
+    first: Approver
+    last: User
+  - username: developer
+    password: "{{ root_password }}"
+    first: Developer
+    last: User
+  - username: rhev-bind-user
+    first: rhev
+    last: binduser
+  - username: ose-bind-user
+    first: ose
+    last: binduser
+    password: "{{ root_password }}"
+  - username: glance
+    first: OpenStack
+    last: Glance
+    password: "{{ root_password }}"
+  - username: cinder
+    first: OpenStack
+    last: Glance
+    password: "{{ root_password }}"
+  - username: heat
+    first: OpenStack
+    last: Heat
+    password: "{{ root_password }}"
+  - username: neutron
+    first: OpenStack
+    last: Neutron
+    password: "{{ root_password }}"
+  - username: nova
+    first: OpenStack
+    last: Nova
+    password: "{{ root_password }}"
+  - username: swift
+    first: OpenStack
+    last: Swift
+    password: "{{ root_password }}"
+
+ipa_group:
+  - groupname: service-accounts
+    members:
+      - rhev-bind-user
+      - ose-bind-user
+      - glance
+      - cinder
+      - heat
+      - neutron
+      - nova
+      - swift
+    pwpolicy: --maxlife=20000 --minlife=0 --history=0 --maxfail=0 --priority=0
+
+
+# the following numbers are the base to generate IP and MAC addresses from
+# hailstorm_number:
+#   layer1:     1
+#   satellite:  10
+#   ipa:        11
+#   rhevm:      12
+#   rhevh1:     13
+#   rhevh2:     14
+#   cloudforms: 17
+#   test-rhel6: 18
+#   test-rhel7: 19
+#   ose3-master: 20
+#   ose3-infranode1: 21
+#   ose3-infranode2: 22
+#   ose3-node1: 23
+#   ose3-node2: 24
+#   infrastructure: 29
+#   rhosp-director: 30
+#   rhosp-compute1: 31
+#   rhosp-compute2: 32
+#   rhosp-compute3: 33
+#   rhosp-control1: 34
+#   rhosp-control2: 35
+#   rhosp-control3: 36
+#   efk:            40

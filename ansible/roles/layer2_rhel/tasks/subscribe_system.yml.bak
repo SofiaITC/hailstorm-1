@@ -7,16 +7,16 @@
 #     rather they are subscribed at the beginning of their life cycle and
 #     unsubscribed at the end of it (i.e. unsubscribe might be messy and leave the system in an inconsistent state)
 
-#- name: check if system is targeting RHN or Satellite
-#  shell: awk '/^hostname =/{print $3}' /etc/rhsm/rhsm.conf
-#  register: rhsm_target
-#  changed_when: false
-#  when: not disable_registration_against_satellite
-#
-#- name: check if system is registered (either RHN or Satellite)
-#  shell: subscription-manager status | awk '/^Overall Status/{ print $3 }'
-#  register: subscription_status
-#  changed_when: false
+- name: check if system is targeting RHN or Satellite
+  shell: awk '/^hostname =/{print $3}' /etc/rhsm/rhsm.conf
+  register: rhsm_target
+  changed_when: false
+  when: not disable_registration_against_satellite
+
+- name: check if system is registered (either RHN or Satellite)
+  shell: subscription-manager status | awk '/^Overall Status/{ print $3 }'
+  register: subscription_status
+  changed_when: false
 
 # check if activation key is present (= demo builder wants to register against satellite)
 
@@ -48,22 +48,22 @@
     # yum module can't do localinstall...
     - name: install katello-ca-consumer-latest
       command: yum -y localinstall http://{{ hostvars['satellite'].vm_nics[0].ip }}/pub/katello-ca-consumer-latest.noarch.rpm  creates=/etc/rhsm/rhsm.conf.kat-backup
-      #- name: register system using activation key against satellite
-      #redhat_subscription:
-        #      state: present
-        #      org_id: "{{ hostvars['satellite'].organization_id }}"
-        #      activationkey: "{{ activation_key }}"
-        #      pool: "{{ pool_regex }}"
+    - name: register system using activation key against satellite
+      redhat_subscription:
+        state: present
+        org_id: "{{ hostvars['satellite'].organization_id }}"
+        activationkey: "{{ activation_key }}"
+        pool: "{{ pool_regex }}"
     - name: install katello-agent
       yum:
         name: katello-agent
         state: present
   when: not disable_registration_against_satellite and activation_key is defined and (rhsm_target.stdout != hostvars['satellite'].hostname or subscription_status.stdout != 'Current')
 
- #- name: register system using username/pw against RHN
- # redhat_subscription:
- #   state: present
- #   username: "{{ rhsm_username }}"
- #   password: "{{ rhsm_password }}"
- #   pool: "{{ pool_regex }}"
- # when: (disable_registration_against_satellite or activation_key is not defined) and subscription_status.stdout != 'Current'
+- name: register system using username/pw against RHN
+  redhat_subscription:
+    state: present
+    username: "{{ rhsm_username }}"
+    password: "{{ rhsm_password }}"
+    pool: "{{ pool_regex }}"
+  when: (disable_registration_against_satellite or activation_key is not defined) and subscription_status.stdout != 'Current'
